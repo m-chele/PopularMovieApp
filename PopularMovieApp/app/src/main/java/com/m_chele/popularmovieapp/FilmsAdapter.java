@@ -2,11 +2,13 @@ package com.m_chele.popularmovieapp;
 
 
 import android.content.Context;
+import android.media.Image;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
 
 public class FilmsAdapter extends BaseAdapter
 {
@@ -38,20 +40,21 @@ public class FilmsAdapter extends BaseAdapter
     @Override
     public View getView(int i, View view, ViewGroup viewGroup)
     {
-        ImageView imageView;
-        if (view == null)
-        {
-            // if it's not recycled, initialize some attributes
-            imageView = new ImageView(mContext);
-            imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setPadding(8, 8, 8, 8);
-        } else
-        {
-            imageView = (ImageView) view;
-        }
 
-        imageView.setImageResource(R.drawable.file_img_1);
+//        Picasso.with(mContext).load("http://i.imgur.com/DvpvklR.png").into(imageView);
+        ImageView imageView = new ImageView(mContext);
+        Picasso.with(mContext).load(R.drawable.file_img_1).into(imageView);
+
+
+
+
+//        SquaredImageVie view = (SquaredImageView) convertView;
+//        if (view == null) {
+//            view = new SquaredImageView(context);
+//        }
+//        String url = getItem(position);
+//
+//        Picasso.with(context).load(url).into(view);
         return imageView;
     }
 }
