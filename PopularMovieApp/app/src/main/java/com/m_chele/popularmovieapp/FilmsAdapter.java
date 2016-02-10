@@ -2,7 +2,6 @@ package com.m_chele.popularmovieapp;
 
 
 import android.content.Context;
-import android.media.Image;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -44,17 +43,6 @@ public class FilmsAdapter extends BaseAdapter
 //        Picasso.with(mContext).load("http://i.imgur.com/DvpvklR.png").into(imageView);
         ImageView imageView = new ImageView(mContext);
         Picasso.with(mContext).load(R.drawable.file_img_1).into(imageView);
-
-
-
-
-//        SquaredImageVie view = (SquaredImageView) convertView;
-//        if (view == null) {
-//            view = new SquaredImageView(context);
-//        }
-//        String url = getItem(position);
-//
-//        Picasso.with(context).load(url).into(view);
         return imageView;
     }
 }
