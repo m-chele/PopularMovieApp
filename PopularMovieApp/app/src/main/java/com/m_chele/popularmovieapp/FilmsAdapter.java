@@ -11,38 +11,57 @@ import com.squareup.picasso.Picasso;
 
 public class FilmsAdapter extends BaseAdapter
 {
+    private String[] fileImages;
     private Context mContext;
 
     public FilmsAdapter(Context mContext)
     {
         this.mContext = mContext;
+        this.fileImages = new String[0];
+    }
+
+    public void setData(String[] fileImages)
+    {
+        this.fileImages = fileImages;
+        notifyDataSetChanged();
     }
 
     @Override
     public int getCount()
     {
-        return 4;
+        return fileImages.length;
     }
 
     @Override
     public Object getItem(int i)
     {
-        return "Pippo " + i;
+        return fileImages[i];
     }
 
     @Override
     public long getItemId(int i)
     {
-        return 0;
+        return i;
     }
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup)
     {
+        if (null == view)
+        {
+            view = new ImageView(mContext);
+        }
 
-//        Picasso.with(mContext).load("http://i.imgur.com/DvpvklR.png").into(imageView);
-        ImageView imageView = new ImageView(mContext);
-        Picasso.with(mContext).load(R.drawable.file_img_1).into(imageView);
-        return imageView;
+        if (fileImages.length > 0)
+        {
+            Picasso.with(mContext)
+                    .load("http://image.tmdb.org/t/p/w185" + fileImages[i])
+                    .placeholder(R.drawable.film_placeholder) // TODO: use right dimension!
+                    .error(R.drawable.image_unavailable) // TODO: use right dimension!
+                    .fit()
+                    .tag(mContext)
+                    .into((ImageView) view);
+        }
+        return view;
     }
 }
