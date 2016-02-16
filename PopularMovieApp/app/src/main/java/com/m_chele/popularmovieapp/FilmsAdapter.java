@@ -44,12 +44,42 @@ public class FilmsAdapter extends BaseAdapter
         return i;
     }
 
+
+//    @Override
+//    public View getView(int i, View view, ViewGroup viewGroup)
+//    {
+//        if (null == view)
+//        {
+//            view = new ImageView(mContext);
+//        }
+//
+//        if (fileImages.length > 0)
+//        {
+//            Picasso.with(mContext)
+//                    .load("http://image.tmdb.org/t/p/w185" + fileImages[i])
+//                    .placeholder(R.drawable.film_placeholder) // TODO: use right dimension!
+//                    .error(R.drawable.image_unavailable) // TODO: use right dimension!
+//                    .fit()
+//                    .tag(mContext)
+//                    .into((ImageView) view);
+//        }
+//        return view;
+//    }
+
+
     @Override
     public View getView(int i, View view, ViewGroup viewGroup)
     {
+        ViewHolder holder;
         if (null == view)
         {
+            holder = new ViewHolder();
             view = new ImageView(mContext);
+            holder.image = (ImageView) view;
+            view.setTag(holder);
+        } else
+        {
+            holder = (ViewHolder) view.getTag();
         }
 
         if (fileImages.length > 0)
@@ -60,8 +90,13 @@ public class FilmsAdapter extends BaseAdapter
                     .error(R.drawable.image_unavailable) // TODO: use right dimension!
                     .fit()
                     .tag(mContext)
-                    .into((ImageView) view);
+                    .into(holder.image);
         }
         return view;
+    }
+
+    static class ViewHolder
+    {
+        ImageView image;
     }
 }
