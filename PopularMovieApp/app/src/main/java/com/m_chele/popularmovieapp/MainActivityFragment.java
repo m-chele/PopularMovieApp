@@ -23,9 +23,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-/**
- * A placeholder fragment containing a simple view.
- */
 public class MainActivityFragment extends Fragment
 {
 
@@ -41,8 +38,8 @@ public class MainActivityFragment extends Fragment
                              Bundle savedInstanceState)
     {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-
         filmsAdapter = new FilmsAdapter(getContext());
+
         filmsGridView = (GridView) rootView.findViewById(R.id.films_gridview);
         filmsGridView.setAdapter(filmsAdapter);
 
@@ -57,35 +54,17 @@ public class MainActivityFragment extends Fragment
         filmsAsyncTask.execute();
     }
 
-    private String[] getMovieDataFromJson(String jsonStr)
-    {
-        String[] posterImages = new String[0];
-
-        try
-        {
-            JSONObject jsonObject = new JSONObject(jsonStr);
-            JSONArray resultsArray = jsonObject.getJSONArray("results");
-            posterImages = new String[resultsArray.length()];
-            for (int i = 0; i < resultsArray.length(); i++)
-            {
-                posterImages[i] = resultsArray.getJSONObject(i).getString("poster_path");
-            }
-        } catch (JSONException e)
-        {
-            Log.e("!!!", e.getMessage());
-        } finally
-        {
-            return posterImages;
-        }
-    }
-
     @NonNull
     private URL getUrl() throws MalformedURLException
     {
-        // http://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=3aaf4cc23bea928c2feb87b85b9f8838/
-        Uri uri = Uri.parse("http://api.themoviedb.org/3/discover/movie?").buildUpon()
-                .appendQueryParameter("sort_by", "popularity.desc")
-                .appendQueryParameter("api_key", getString(R.string.api_key))
+        final String BASE_URI = "http://api.themoviedb.org/3/discover/movie?";
+        final String SORT_BY_QUERY_PARAM = "sort_by";
+        final String POPULARITY_DESC_QUERY_VALUE = "popularity.desc";
+        final String API_KEY_QUERY_PARAM = "api_key";
+
+        Uri uri = Uri.parse(BASE_URI).buildUpon()
+                .appendQueryParameter(SORT_BY_QUERY_PARAM, POPULARITY_DESC_QUERY_VALUE)
+                .appendQueryParameter(API_KEY_QUERY_PARAM, getString(R.string.api_key))
                 .build();
         return new URL(uri.toString());
     }
@@ -120,7 +99,6 @@ public class MainActivityFragment extends Fragment
 
                 String line;
 
-                // TODO: if BuildConf == DEBUG ?
                 while ((line = reader.readLine()) != null)
                 {
                     // add \n for debug purpose
@@ -159,9 +137,9 @@ public class MainActivityFragment extends Fragment
             try
             {
                 result = getMovieDataFromJson(responseJsonStr);
-//                } catch (JSONException e)
-//                {
-//                    Log.e("!!!", "Error parsing json", e);
+            } catch (JSONException e)
+            {
+                Log.e("!!!", "Error parsing json", e);
             } finally
             {
                 Log.d("!!!", "background result: " + result.length);
@@ -170,6 +148,17 @@ public class MainActivityFragment extends Fragment
             }
         }
 
+        private String[] getMovieDataFromJson(String jsonStr) throws JSONException
+        {
+            JSONObject jsonObject = new JSONObject(jsonStr);
+            JSONArray resultsArray = jsonObject.getJSONArray("results");
+            String[] posterImages = new String[resultsArray.length()];
+            for (int i = 0; i < resultsArray.length(); i++)
+            {
+                posterImages[i] = resultsArray.getJSONObject(i).getString("poster_path");
+            }
+            return posterImages;
+        }
 
         @Override
         protected void onPostExecute(String[] fileImages)
