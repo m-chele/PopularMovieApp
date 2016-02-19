@@ -4,11 +4,11 @@
                   android:layout_height="match_parent">
 
     <ListPreference
-        android:defaultValue="vote_average.desc"
-        android:dialogTitle="Sort order dialog title"
+        android:defaultValue="@string/popularity_desc_query_value"
+        android:dialogTitle="Sort by"
         android:entries="@array/pref_sort_order_entries"
         android:entryValues="@array/pref_sort_order_values"
         android:key="pref_sort_order"
-        android:title="Sort order title"
+        android:title="Sort order"
         />
 </PreferenceScreen>

@@ -6,7 +6,7 @@
     </string-array>
 
     <string-array name="pref_sort_order_values">
-        <item >popularity.desc</item>
-        <item>vote_average.desc</item>
+        <item >@string/popularity_desc_query_value</item>
+        <item>@string/vote_desc_query_value</item>
     </string-array>
 </resources>

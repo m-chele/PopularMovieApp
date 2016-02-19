@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">PopularMovieApp</string>
     <string name="action_settings">Settings</string>
+
+    <string name="popularity_desc_query_value" translatable="false">vote_average.desc</string>
+    <string name="vote_desc_query_value" translatable="false">vote_average.desc</string>
 </resources>

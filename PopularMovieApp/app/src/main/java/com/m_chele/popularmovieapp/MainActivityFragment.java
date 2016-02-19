@@ -140,8 +140,9 @@ public class MainActivityFragment extends Fragment
         {
             final String BASE_URI = "http://api.themoviedb.org/3/discover/movie?";
             final String SORT_BY_QUERY_PARAM = "sort_by";
+            // TODO: get values from prefs
             final String POPULARITY_DESC_QUERY_VALUE = "popularity.desc";
-            final String VOTE_DESC_QUERY_VALUE = "vote_average.desc";
+            final String VOTE_DESC_QUERY_VALUE = getString(R.string.vote_desc_query_value);
 
             final String API_KEY_QUERY_PARAM = "api_key";
 
