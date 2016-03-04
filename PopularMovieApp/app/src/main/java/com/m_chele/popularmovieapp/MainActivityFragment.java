@@ -101,6 +101,7 @@ public class MainActivityFragment extends Fragment
             } catch (IOException e)
             {
                 // error
+                Log.e("MainActivityFragment", "IOException", e);
                 return null;
             } finally
             {

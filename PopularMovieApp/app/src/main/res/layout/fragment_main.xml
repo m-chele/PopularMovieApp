@@ -9,8 +9,8 @@
         android:id="@+id/films_gridview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:numColumns="auto_fit"
         android:horizontalSpacing="0dp"
+        android:numColumns="auto_fit"
         android:verticalSpacing="0dp"
         >
     </GridView>
