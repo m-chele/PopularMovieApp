@@ -1,10 +1,10 @@
 package com.m_chele.popularmovieapp;
 
+import android.app.Fragment;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,7 +38,7 @@ public class MainActivityFragment extends Fragment
                              Bundle savedInstanceState)
     {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-        filmsAdapter = new FilmsAdapter(getContext());
+        filmsAdapter = new FilmsAdapter(getActivity());
 
         filmsGridView = (GridView) rootView.findViewById(R.id.films_gridview);
         filmsGridView.setAdapter(filmsAdapter);

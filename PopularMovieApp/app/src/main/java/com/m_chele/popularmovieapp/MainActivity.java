@@ -9,6 +9,9 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity
 {
 
+    private MainActivityFragment mainFragment;
+    private SettingsFragment settingsFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -16,6 +19,14 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mainFragment = new MainActivityFragment();
+        settingsFragment = new SettingsFragment();
+
+        getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment, mainFragment)
+                .commit();
     }
 
     @Override
@@ -39,7 +50,7 @@ public class MainActivity extends AppCompatActivity
         {
             getFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.fragment, new SettingsFragment())
+                    .replace(R.id.fragment, settingsFragment)
                     .commit();
             return true;
         }
