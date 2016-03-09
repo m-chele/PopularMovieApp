@@ -55,8 +55,6 @@ public class MainActivityFragment extends Fragment
     }
 
 
-
-
     private class FilmsAsyncTask extends AsyncTask<Void, Void, String[]>
     {
         @Override
@@ -130,8 +128,6 @@ public class MainActivityFragment extends Fragment
                 Log.e("!!!", "Error parsing json", e);
             } finally
             {
-                Log.d("!!!", "background result: " + result.length);
-
                 return result;
             }
         }
