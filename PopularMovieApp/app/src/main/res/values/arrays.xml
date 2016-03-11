@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string-array name="pref_sort_order_entries">
         <item>Popularity</item>
         <item>Ranking</item>
     </string-array>
 
     <string-array name="pref_sort_order_values">
-        <item >@string/popularity_desc_query_value</item>
+        <item>@string/popularity_desc_query_value</item>
         <item>@string/vote_desc_query_value</item>
     </string-array>
+
 </resources>
