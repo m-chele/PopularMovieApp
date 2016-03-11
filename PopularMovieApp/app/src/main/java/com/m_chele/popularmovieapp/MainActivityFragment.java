@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -137,17 +138,20 @@ public class MainActivityFragment extends Fragment
         {
             final String BASE_URI = "http://api.themoviedb.org/3/discover/movie?";
             final String SORT_BY_QUERY_PARAM = "sort_by";
-            // TODO: get values from prefs
-            final String POPULARITY_DESC_QUERY_VALUE = "popularity.desc";
-            final String VOTE_DESC_QUERY_VALUE = getString(R.string.vote_desc_query_value);
-
+            final String SORT_BY_QUERY_VALUE = getPreferredSortOrderValue();
             final String API_KEY_QUERY_PARAM = "api_key";
 
             Uri uri = Uri.parse(BASE_URI).buildUpon()
-                    .appendQueryParameter(SORT_BY_QUERY_PARAM, POPULARITY_DESC_QUERY_VALUE)
+                    .appendQueryParameter(SORT_BY_QUERY_PARAM, SORT_BY_QUERY_VALUE)
                     .appendQueryParameter(API_KEY_QUERY_PARAM, getString(R.string.api_key))
                     .build();
             return new URL(uri.toString());
+        }
+
+        private String getPreferredSortOrderValue()
+        {
+            return PreferenceManager.getDefaultSharedPreferences(getActivity())
+                    .getString(getString(R.string.pref_sort_order_key), getString(R.string.vote_desc_query_value));
         }
 
 
