@@ -18,7 +18,6 @@ public class SettingsFragment extends PreferenceFragment
                 {
                     if (getString(R.string.pref_sort_order_key).equals(key))
                     {
-                        Log.d("!!!", "key is pref_sort_order ");
                         Preference preference = findPreference(key);
                         preference.setSummary(sharedPreferences.getString(key, ""));
                     }
