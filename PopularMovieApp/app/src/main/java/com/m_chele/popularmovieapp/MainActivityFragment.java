@@ -24,6 +24,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class MainActivityFragment extends Fragment
 {
@@ -49,7 +50,8 @@ public class MainActivityFragment extends Fragment
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id)
             {
-                Log.d("!!!", "item clicked " + position);
+                Log.d("!!!", "item clicked" + filmsAdapter.getItem(position));
+
                 getFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragment, new DetailFragment())
@@ -65,21 +67,21 @@ public class MainActivityFragment extends Fragment
     public void onStart()
     {
         super.onStart();
-        AsyncTask<Void, Void, String[]> filmsAsyncTask = new FilmsAsyncTask();
+        AsyncTask<Void, Void, ArrayList> filmsAsyncTask = new FilmsAsyncTask();
         filmsAsyncTask.execute();
     }
 
 
-    private class FilmsAsyncTask extends AsyncTask<Void, Void, String[]>
+    private class FilmsAsyncTask extends AsyncTask<Void, Void, ArrayList>
     {
         @Override
-        protected String[] doInBackground(Void... params)
+        protected ArrayList doInBackground(Void... params)
         {
             HttpURLConnection urlConnection = null;
             BufferedReader reader = null;
 
             String responseJsonStr = null;
-            String[] result = null;
+            ArrayList result = null;
             try
             {
                 URL url = getUrl();
@@ -169,20 +171,56 @@ public class MainActivityFragment extends Fragment
         }
 
 
-        private String[] getMovieDataFromJson(String jsonStr) throws JSONException
+        private ArrayList getMovieDataFromJson(String jsonStr) throws JSONException
         {
+//            original title:
+            //            original_title: "Deadpool",
+//            movie poster image thumbnail
+            //            poster_path: "/inVq3FRqcYIRl2la8iZikYYxFNR.jpg",
+
+//            A plot synopsis (called overview in the api)
+            //                overview: "Based upon Marvel Comics’ most unconventional anti-hero, DEADPOOL tells the origin story of former Special Forces operative turned mercenary Wade Wilson, who after being subjected to a rogue experiment that leaves him with accelerated healing powers, adopts the alter ego Deadpool. Armed with his new abilities and a dark, twisted sense of humor, Deadpool hunts down the man who nearly destroyed his life.",
+//            user rating (called vote_average in the api)
+            //                vote_average: 7.22
+
+//            release date
+            //                release_date: "2016-02-09",
+
+
+//                         "/n1y094tVDFATSzkTnFxoGZ1qNsG.jpg"
+//            poster_path: "/inVq3FRqcYIRl2la8iZikYYxFNR.jpg",
+//                    adult: false,
+//                overview: "Based upon Marvel Comics’ most unconventional anti-hero, DEADPOOL tells the origin story of former Special Forces operative turned mercenary Wade Wilson, who after being subjected to a rogue experiment that leaves him with accelerated healing powers, adopts the alter ego Deadpool. Armed with his new abilities and a dark, twisted sense of humor, Deadpool hunts down the man who nearly destroyed his life.",
+//                release_date: "2016-02-09",
+//                genre_ids: [
+//            28,
+//                    12,
+//                    35
+//            ],
+//            id: 293660,
+//                    original_title: "Deadpool",
+//                original_language: "en",
+//                title: "Deadpool",
+//                backdrop_path: "/n1y094tVDFATSzkTnFxoGZ1qNsG.jpg",
+//                popularity: 50.808823,
+//                vote_count: 1991,
+//                video: false,
+//                vote_average: 7.22
+
+
             JSONObject jsonObject = new JSONObject(jsonStr);
             JSONArray resultsArray = jsonObject.getJSONArray("results");
-            String[] posterImages = new String[resultsArray.length()];
-            for (int i = 0; i < resultsArray.length(); i++)
+            ArrayList posterImages = new ArrayList(resultsArray.length());
+            for (int index = 0; index < resultsArray.length(); index++)
             {
-                posterImages[i] = resultsArray.getJSONObject(i).getString("poster_path");
+
+                posterImages.add(index, resultsArray.getJSONObject(index).getString("poster_path"));
             }
             return posterImages;
         }
 
         @Override
-        protected void onPostExecute(String[] fileImages)
+        protected void onPostExecute(ArrayList fileImages)
         {
             super.onPostExecute(fileImages);
             filmsAdapter.setData(fileImages);

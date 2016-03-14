@@ -9,18 +9,20 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+
 public class FilmsAdapter extends BaseAdapter
 {
-    private String[] fileImages;
+    private ArrayList fileImages;
     private Context mContext;
 
     public FilmsAdapter(Context mContext)
     {
         this.mContext = mContext;
-        this.fileImages = new String[0];
+        this.fileImages = new ArrayList();
     }
 
-    public void setData(String[] fileImages)
+    public void setData(ArrayList fileImages)
     {
         this.fileImages = fileImages;
         notifyDataSetChanged();
@@ -29,13 +31,13 @@ public class FilmsAdapter extends BaseAdapter
     @Override
     public int getCount()
     {
-        return fileImages.length;
+        return fileImages.size();
     }
 
     @Override
     public Object getItem(int i)
     {
-        return fileImages[i];
+        return fileImages.get(i);
     }
 
     @Override
@@ -59,12 +61,12 @@ public class FilmsAdapter extends BaseAdapter
             holder = (ViewHolder) view.getTag();
         }
 
-        if (fileImages.length > 0)
+        if (fileImages.size() > 0)
         {
             final String IMAGE_SIZE = "/w185";
             final String IMAGE_BASE_URI = "http://image.tmdb.org/t/p";
             Picasso.with(mContext)
-                    .load(IMAGE_BASE_URI + IMAGE_SIZE + fileImages[i])
+                    .load(IMAGE_BASE_URI + IMAGE_SIZE + fileImages.get(i))
                     .placeholder(R.drawable.film_placeholder)
                     .error(R.drawable.image_unavailable)
                     .fit()

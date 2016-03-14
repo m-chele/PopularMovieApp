@@ -10,6 +10,6 @@
         android:layout_height="match_parent"
         android:background="@color/colorAccent"
         android:gravity="center"
-        android:text="sono il detaglio dello zio"/>
+        android:text="sono il dettaglio dello zio"/>
 
 </LinearLayout>
