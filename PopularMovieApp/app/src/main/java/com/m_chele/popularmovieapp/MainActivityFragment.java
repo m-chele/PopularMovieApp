@@ -25,7 +25,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class MainActivityFragment extends Fragment
 {
@@ -217,9 +216,11 @@ public class MainActivityFragment extends Fragment
             ArrayList filmsList = new ArrayList(resultsArray.length());
             for (int index = 0; index < resultsArray.length(); index++)
             {
-                Bundle film = new Bundle(3);
+                Bundle film = new Bundle(4);
                 film.putString(getString(R.string.key_poster_path), resultsArray.getJSONObject(index).getString(getString(R.string.key_poster_path)));
-//                film.putString("poster_path", resultsArray.getJSONObject(index).getString(getString(R.string.key_poster_path)));
+                film.putString(getString(R.string.key_original_title), resultsArray.getJSONObject(index).getString(getString(R.string.key_original_title)));
+                film.putString(getString(R.string.key_overview), resultsArray.getJSONObject(index).getString(getString(R.string.key_overview)));
+                film.putString(getString(R.string.key_release_date), resultsArray.getJSONObject(index).getString(getString(R.string.key_release_date)));
                 filmsList.add(index, film);
             }
             return filmsList;

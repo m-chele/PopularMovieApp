@@ -7,5 +7,8 @@
     <string name="vote_desc_query_value" translatable="false">vote_average.desc</string>
     <string name="pref_sort_order_key">pref_sort_order</string>
     <string name="key_poster_path">poster_path</string>
+    <string name="key_original_title">original_title</string>
+    <string name="key_overview">overview</string>
+    <string name="key_release_date">release_date</string>
 
 </resources>

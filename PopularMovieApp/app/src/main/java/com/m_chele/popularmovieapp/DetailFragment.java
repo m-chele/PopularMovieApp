@@ -26,7 +26,16 @@ public class DetailFragment extends Fragment
     {
         View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
         ((TextView) rootView.findViewById(R.id.film_title_textview))
+                .setText(filmModel.getString(getString(R.string.key_original_title)));
+
+        ((TextView) rootView.findViewById(R.id.film_poster_textview))
                 .setText(filmModel.getString(getString(R.string.key_poster_path)));
+
+        ((TextView) rootView.findViewById(R.id.film_overview_textview))
+                .setText(filmModel.getString(getString(R.string.key_overview)));
+
+        ((TextView) rootView.findViewById(R.id.film_release_date_textview))
+                .setText(filmModel.getString(getString(R.string.key_release_date)));
 
         return rootView;
     }
