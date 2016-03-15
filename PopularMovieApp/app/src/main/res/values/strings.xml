@@ -6,5 +6,6 @@
     <string name="popularity_desc_query_value" translatable="false">popularity.desc</string>
     <string name="vote_desc_query_value" translatable="false">vote_average.desc</string>
     <string name="pref_sort_order_key">pref_sort_order</string>
+    <string name="key_poster_path">poster_path</string>
 
 </resources>

@@ -25,6 +25,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MainActivityFragment extends Fragment
 {
@@ -173,6 +174,7 @@ public class MainActivityFragment extends Fragment
 
         private ArrayList getMovieDataFromJson(String jsonStr) throws JSONException
         {
+            //TODO: creare oggetto model per film
 //            original title:
             //            original_title: "Deadpool",
 //            movie poster image thumbnail
@@ -210,13 +212,14 @@ public class MainActivityFragment extends Fragment
 
             JSONObject jsonObject = new JSONObject(jsonStr);
             JSONArray resultsArray = jsonObject.getJSONArray("results");
-            ArrayList posterImages = new ArrayList(resultsArray.length());
+            ArrayList filmsList = new ArrayList(resultsArray.length());
             for (int index = 0; index < resultsArray.length(); index++)
             {
-
-                posterImages.add(index, resultsArray.getJSONObject(index).getString("poster_path"));
+                HashMap<String, String> film = new HashMap<>(3);
+                film.put("poster_path", resultsArray.getJSONObject(index).getString(getString(R.string.key_poster_path)));
+                filmsList.add(index, film);
             }
-            return posterImages;
+            return filmsList;
         }
 
         @Override

@@ -10,34 +10,35 @@ import android.widget.ImageView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class FilmsAdapter extends BaseAdapter
 {
-    private ArrayList fileImages;
+    private ArrayList<HashMap<String, String>> filmsList;
     private Context mContext;
 
     public FilmsAdapter(Context mContext)
     {
         this.mContext = mContext;
-        this.fileImages = new ArrayList();
+        this.filmsList = new ArrayList();
     }
 
     public void setData(ArrayList fileImages)
     {
-        this.fileImages = fileImages;
+        this.filmsList = fileImages;
         notifyDataSetChanged();
     }
 
     @Override
     public int getCount()
     {
-        return fileImages.size();
+        return filmsList.size();
     }
 
     @Override
     public Object getItem(int i)
     {
-        return fileImages.get(i);
+        return filmsList.get(i);
     }
 
     @Override
@@ -61,12 +62,12 @@ public class FilmsAdapter extends BaseAdapter
             holder = (ViewHolder) view.getTag();
         }
 
-        if (fileImages.size() > 0)
+        if (filmsList.size() > 0)
         {
             final String IMAGE_SIZE = "/w185";
             final String IMAGE_BASE_URI = "http://image.tmdb.org/t/p";
             Picasso.with(mContext)
-                    .load(IMAGE_BASE_URI + IMAGE_SIZE + fileImages.get(i))
+                    .load(IMAGE_BASE_URI + IMAGE_SIZE + filmsList.get(i).get(mContext.getString(R.string.key_poster_path)))
                     .placeholder(R.drawable.film_placeholder)
                     .error(R.drawable.image_unavailable)
                     .fit()
