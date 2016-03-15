@@ -51,11 +51,13 @@ public class MainActivityFragment extends Fragment
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id)
             {
-                Log.d("!!!", "item clicked" + filmsAdapter.getItem(position));
+                final DetailFragment detailFragment = new DetailFragment();
+                final Bundle filmModel = (Bundle) filmsAdapter.getItem(position);
+                detailFragment.setArguments(filmModel);
 
                 getFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.fragment, new DetailFragment())
+                        .replace(R.id.fragment, detailFragment)
                         .addToBackStack(null)
                         .commit();
             }
@@ -215,8 +217,9 @@ public class MainActivityFragment extends Fragment
             ArrayList filmsList = new ArrayList(resultsArray.length());
             for (int index = 0; index < resultsArray.length(); index++)
             {
-                HashMap<String, String> film = new HashMap<>(3);
-                film.put("poster_path", resultsArray.getJSONObject(index).getString(getString(R.string.key_poster_path)));
+                Bundle film = new Bundle(3);
+                film.putString(getString(R.string.key_poster_path), resultsArray.getJSONObject(index).getString(getString(R.string.key_poster_path)));
+//                film.putString("poster_path", resultsArray.getJSONObject(index).getString(getString(R.string.key_poster_path)));
                 filmsList.add(index, film);
             }
             return filmsList;
