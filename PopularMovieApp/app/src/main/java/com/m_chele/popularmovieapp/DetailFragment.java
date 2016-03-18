@@ -44,7 +44,9 @@ public class DetailFragment extends Fragment
                 .setText(filmModel.getString(getString(R.string.key_overview)));
 
         ((TextView) rootView.findViewById(R.id.film_release_date_textview))
-                .setText("release date: " + filmModel.getString(getString(R.string.key_release_date)));
+                .setText(String.format(
+                        getResources().getString(R.string.release_date_to_format),
+                        filmModel.getString(getString(R.string.key_release_date))));
 
         return rootView;
     }
