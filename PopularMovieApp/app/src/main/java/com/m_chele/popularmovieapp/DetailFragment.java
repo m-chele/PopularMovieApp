@@ -28,8 +28,7 @@ public class DetailFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
-        ((TextView) rootView.findViewById(R.id.film_title_textview))
-                .setText(filmModel.getString(getString(R.string.key_original_title)));
+        getActivity().setTitle(filmModel.getString(getString(R.string.key_original_title)));
 
         ImageView imageView = ((ImageView) rootView.findViewById(R.id.film_poster_textview));
 
@@ -45,7 +44,7 @@ public class DetailFragment extends Fragment
                 .setText(filmModel.getString(getString(R.string.key_overview)));
 
         ((TextView) rootView.findViewById(R.id.film_release_date_textview))
-                .setText(filmModel.getString(getString(R.string.key_release_date)));
+                .setText("release date: " + filmModel.getString(getString(R.string.key_release_date)));
 
         return rootView;
     }
